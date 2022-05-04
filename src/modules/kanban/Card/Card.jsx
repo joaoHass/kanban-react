@@ -1,10 +1,6 @@
 import "./Card.css"
 
-export default function Card({
-  name = "",
-  description = "Fallback pro caso da descrição não existir",
-  category,
-}) {
+export default function Card({ name = "", description = "", category }) {
   return (
     <>
       <div className="card">
