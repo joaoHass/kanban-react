@@ -7,6 +7,7 @@ export default function ColumnStack({ tasks }) {
       <div className="stack">
         {tasks.map((task) => (
           <Card
+            key={task.id}
             name={task.name}
             description={task.description}
             category={task.category}
