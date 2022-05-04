@@ -1,4 +1,3 @@
-import { useState } from "react"
 import "./App.css"
 import KanbanApp from "./modules/kanban/KanbanApp/KanbanApp"
 
