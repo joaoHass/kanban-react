@@ -1,3 +1,7 @@
+h2 {
+  color: #fff;
+}
+
 .stack {
   display: flex;
   flex-direction: column;
