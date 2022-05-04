@@ -1,10 +1,13 @@
 import Card from "../Card/Card"
 import "./ColumnStack.css"
 
-export default function ColumnStack({ tasks, deleteTask }) {
+export default function ColumnStack({ title, tasks, deleteTask }) {
   return (
     <>
       <div className="stack">
+        <h2>
+          {title} ({tasks.length})
+        </h2>
         {tasks.map((task) => (
           <Card
             key={task.id}
