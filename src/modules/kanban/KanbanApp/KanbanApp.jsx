@@ -36,10 +36,8 @@ const TASKS = [
 ]
 
 export default function KanbanApp() {
-  // criando
   const [tasks, setTasks] = useState(TASKS)
 
-  // adicionando uma nova tarefa à lista de tarefas
   function createNewTask(name = "", desc = "") {
     setTasks([
       ...tasks,
@@ -52,21 +50,35 @@ export default function KanbanApp() {
     ])
   }
 
+  function deleteTask(taskId) {
+    setTasks(
+      tasks.filter((task) => {
+        if (taskId !== task.id) {
+          return task
+        }
+      })
+    )
+  }
+
   return (
     <>
       <TaskCreator createNewTask={createNewTask}></TaskCreator>
       <div className="kanban">
         <ColumnStack
           tasks={tasks.filter((task) => task.category === "Todo")}
+          deleteTask={deleteTask}
         ></ColumnStack>
         <ColumnStack
           tasks={tasks.filter((task) => task.category === "Running")}
+          deleteTask={deleteTask}
         ></ColumnStack>
         <ColumnStack
           tasks={tasks.filter((task) => task.category === "Revision")}
+          deleteTask={deleteTask}
         ></ColumnStack>
         <ColumnStack
           tasks={tasks.filter((task) => task.category === "Concluded")}
+          deleteTask={deleteTask}
         ></ColumnStack>
       </div>
     </>
