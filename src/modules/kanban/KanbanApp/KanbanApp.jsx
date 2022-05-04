@@ -53,9 +53,7 @@ export default function KanbanApp() {
   function deleteTask(taskId) {
     setTasks(
       tasks.filter((task) => {
-        if (taskId !== task.id) {
-          return task
-        }
+        return taskId !== task.id ? task : false
       })
     )
   }
