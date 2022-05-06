@@ -6,22 +6,20 @@ export default function Card({
   description = "",
   category,
   deleteTask,
-  changeTaskStatus,
 }) {
+  // queremos que o elemento (qual stack) que disparar o evento de drop saiba qual card está sendo passado
+  // para poder prosseguir com a lógica. Utilizamos do método dataTransfer para isso, passando o id do card
+  // em questão. O handling do resto da lógica acontece no ColumnStack
   function onDragStart(e) {
+    e.dataTransfer.setData("text/plain", id)
+
+    // utilizamos o setTimeout para evitar que a indicação visual de que estamos arrastando a task suma
     setTimeout(() => {
       e.target.classList.add("hide")
     }, 0)
   }
 
   function onDragEnd(e) {
-    // verificando se o pai é uma stack válida
-    if (e.target.parentNode.classList.contains("stack")) {
-      // mudar isso
-      // estou pegando o id do stack pai atual, preciso pegar do stack alvo
-      // implementar isso no drop da ColumnStack
-      changeTaskStatus(id, e.target.parentNode.attributes["id"])
-    }
     e.target.classList.remove("hide")
   }
 
