@@ -30,7 +30,7 @@ export default function TaskCreator({ createNewTask }) {
   return (
     <>
       <form className="createTask" onSubmit={(e) => handleCardCreation(e)}>
-        <label htmlFor="name">Nome da task</label>
+        <label htmlFor="name">Task Name</label>
         <input
           onChange={(e) => handleNameChange(e)}
           value={name || ""}
@@ -38,7 +38,7 @@ export default function TaskCreator({ createNewTask }) {
           name="name"
           required
         />
-        <label htmlFor="desc">Descrição da task </label>
+        <label htmlFor="desc">Task Description </label>
         <input
           onChange={(e) => handleDescChange(e)}
           value={description || ""}
