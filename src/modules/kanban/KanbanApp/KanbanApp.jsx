@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 import ColumnStack from "../ColumnStack/ColumnStack"
 import TaskCreator from "../TaskCreator/TaskCreator"
@@ -12,7 +13,7 @@ export default function KanbanApp() {
     setTasks([
       ...tasks,
       {
-        id: tasks.length + 1,
+        id: uuidv4(),
         name: name,
         description: desc,
         category: "Todo",
@@ -28,29 +29,21 @@ export default function KanbanApp() {
     )
   }
 
-  function changeTaskStatus(taskId, category) {
-    // pegando o index da task que precisamos alterar o estado
-    let categoryy = "Todo"
-    if (category === 2) categoryy = "Running"
-    if (category === 2) categoryy = "Revision"
-    if (category === 2) categoryy = "Concluded"
-    console.log(categoryy)
+  function changeTaskStatus(taskId, categoryId) {
+    const categoryName = STACKS.find(
+      (column) => column.id === parseInt(categoryId, 10)
+    )["name"]
     const taskToChangeId = tasks.findIndex((x) => x.id === taskId)
-    // alterando ele
     tasks[taskToChangeId] = {
       ...tasks[taskToChangeId],
-      category: categoryy,
+      category: categoryName,
     }
-
-    console.log(Array.isArray(tasks), tasks)
+    // forçando uma re-renderização pelo React
+    setTasks([...tasks])
   }
 
+  // atualizamos o localStorage toda vez que o componente é re-renderizado
   window.localStorage.setItem("tasks", JSON.stringify(tasks))
-  console.log(
-    tasks,
-    Array.isArray(tasks),
-    Array.isArray(JSON.parse(window.localStorage.getItem("tasks")))
-  )
 
   const STACKS = [
     {
@@ -75,46 +68,18 @@ export default function KanbanApp() {
     <>
       <TaskCreator createNewTask={createNewTask}></TaskCreator>
       <div className="kanban">
-        {/*         {STACKS.forEach((column) => {
-          ;<ColumnStack
-            title={column.name}
-            tasks={tasks.filter((task) => task.category === column.name)}
-            deleteTask={deleteTask}
-            changeTaskStatus={changeTaskStatus}
-          ></ColumnStack>
-        })} */}
-        <ColumnStack
-          title={"Todo"}
-          id="1"
-          tasks={
-            Array.isArray(tasks)
-              ? tasks.filter((task) => task.category === "Todo")
-              : console.log("n")
-          }
-          deleteTask={deleteTask}
-          changeTaskStatus={changeTaskStatus}
-        ></ColumnStack>
-        <ColumnStack
-          title={"Running"}
-          id="2"
-          tasks={tasks.filter((task) => task.category === "Running")}
-          deleteTask={deleteTask}
-          changeTaskStatus={changeTaskStatus}
-        ></ColumnStack>
-        <ColumnStack
-          title={"In Revision"}
-          id="3"
-          tasks={tasks.filter((task) => task.category === "Revision")}
-          deleteTask={deleteTask}
-          changeTaskStatus={changeTaskStatus}
-        ></ColumnStack>
-        <ColumnStack
-          title={"Concluded"}
-          id="4"
-          tasks={tasks.filter((task) => task.category === "Concluded")}
-          deleteTask={deleteTask}
-          changeTaskStatus={changeTaskStatus}
-        ></ColumnStack>
+        {STACKS.map((column) => {
+          return (
+            <ColumnStack
+              key={column.id}
+              title={column.name}
+              id={column.id}
+              tasks={tasks.filter((task) => task.category === column.name)}
+              deleteTask={deleteTask}
+              changeTaskStatus={changeTaskStatus}
+            ></ColumnStack>
+          )
+        })}
       </div>
     </>
   )
