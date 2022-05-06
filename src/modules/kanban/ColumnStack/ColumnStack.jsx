@@ -9,7 +9,7 @@ export default function ColumnStack({
   changeTaskStatus,
 }) {
   function dragEnter(e) {
-    // deixando a stack um objeto válido para drops
+    // utilizamos o e.preventDefault() para deixar a stack um objeto válido para ser usado como drop target
     e.preventDefault()
     e.target.classList.add("drag-over")
   }
@@ -25,6 +25,13 @@ export default function ColumnStack({
 
   function drop(e) {
     e.target.classList.remove("drag-over")
+
+    // pegando a id do card passada na função onDragStart(e) do Card
+    let cardId = e.dataTransfer.getData("text/plain")
+
+    //utilizamos o currentTarget para sempre pegar a stack que está com o handler, e não o evento mais profundo que disparou
+    // isso evita que quando o user arraste o card em cima de outro, haja erros. Já que ele não vai passar algum elemento do card como target, mas sim sempre a stack (que tem o handler)
+    changeTaskStatus(cardId, e.currentTarget.attributes["id"].value)
   }
 
   return (
