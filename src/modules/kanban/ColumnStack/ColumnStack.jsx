@@ -1,7 +1,7 @@
 import Card from "../Card/Card"
 import "./ColumnStack.css"
 
-import { Box, Heading, Text } from "@chakra-ui/react"
+import { Heading } from "@chakra-ui/react"
 
 export default function ColumnStack({
   title,
