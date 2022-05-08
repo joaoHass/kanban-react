@@ -1,6 +1,8 @@
 import Card from "../Card/Card"
 import "./ColumnStack.css"
 
+import { Box, Heading, Text } from "@chakra-ui/react"
+
 export default function ColumnStack({
   title,
   id,
@@ -37,9 +39,9 @@ export default function ColumnStack({
   return (
     <>
       <div className="wrapper">
-        <h2>
+        <Heading color="#fff" mb={8} size="lg">
           {title} ({tasks.length})
-        </h2>
+        </Heading>
         <div
           className="stack"
           id={id}

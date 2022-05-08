@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import "./TaskCreator.css"
+import { Box, Input, Text, Textarea, Button } from "@chakra-ui/react"
 
 // Requisitos:
 // precisa que quando o user clique no botão, execute a função createNewTask
@@ -29,26 +29,64 @@ export default function TaskCreator({ createNewTask }) {
 
   return (
     <>
-      <form className="createTask" onSubmit={(e) => handleCardCreation(e)}>
-        <label htmlFor="name">Task Name</label>
-        <input
+      <Box
+        as="form"
+        className="createTask"
+        onSubmit={(e) => handleCardCreation(e)}
+        p={8}
+        maxWidth="lg"
+        m="auto"
+      >
+        <Text
+          as="label"
+          htmlFor="name"
+          display="inline-block"
+          fontSize="xl"
+          fontWeight="600"
+          color="#fff"
+          mb={1}
+        >
+          Task Name
+        </Text>
+        <Input
           onChange={(e) => handleNameChange(e)}
           value={name || ""}
           type="text"
           name="name"
           required
+          placeholder="Task name here"
+          fontWeight="600"
+          color="#fff"
+          focusBorderColor="green.200"
+          mb={4}
         />
-        <label htmlFor="desc">Task Description </label>
-        <input
+        <Text
+          as="label"
+          htmlFor="desc"
+          display="inline-block"
+          fontSize="xl"
+          fontWeight="600"
+          color="#fff"
+          mb={1}
+        >
+          Task Description{" "}
+        </Text>
+        <Textarea
           onChange={(e) => handleDescChange(e)}
           value={description || ""}
           type="text"
           name="desc"
           required
+          placeholder="Description"
+          fontWeight="600"
+          color="#fff"
+          focusBorderColor="green.200"
         />
 
-        <button type="submit">+</button>
-      </form>
+        <Button type="submit" colorScheme="green" m="auto" mt={4}>
+          Create Task
+        </Button>
+      </Box>
     </>
   )
 }
