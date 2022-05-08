@@ -1,6 +1,6 @@
 # Kanban React (primeiro projeto pessoal oficial)
 
-**Site do projeto:** https://encurtador.com.br/bkCDX
+**Site do projeto:** https://kanban-react-hass.netlify.app/
 
 Se quiser acompanhar o meu progresso, estou fazendo posts pra relatar como tem sido o desenvolvimento: https://dev.to/joaohass
 
